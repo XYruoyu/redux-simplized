@@ -14,11 +14,13 @@ class AddTodo extends  React.Component{
     this.props.dispatch(addTodo(this.state.input.value))
   }
   render() {
+    let index = 1
     return (
       <div>
         <input ref={node => this.state.input = node}></input>
         {/* <button onClick={this.props.dispatch(addTodo(input.value))}>添加todos</button> //!this指向错误，下面用箭头才能指向其本身 */}
-        <button onClick={() => this.props.dispatch(addTodo(this.state.input.value))}>添加todos</button>
+        {/* <button onClick={() => this.props.dispatch(addTodo(this.state.input.value))}>添加todos</button> */}
+        <button onClick={() => this.props.dispatch({type: 'ADD_TODO', id:index++, text:this.state.input.value })}>添加todos</button> {/*  dispath的内容在reducer的第二个参数获取 */}
         {/* <button onClick={this.get}>添加todos</button> */}
       </div>
     )
