@@ -15,5 +15,16 @@
     * connect(mapStateToProps,mapDispatchToProps)(TodoList) 中， 
 
         mapStateToProps 可以拿到state中的数据，然后通过此方法将state进行进一步的加工注入到TodoList的props中
-        
+
         mapDispatchToProps 可以拿到dispatch派发的方法，需要注意的点是，如果在connect中有这个参数，就不能再组件中通过this.props.dispatch 去派发
+
+### 梳理实现的步骤
+
+ *  输入框是需要往 state中存数组 ===> action 中要有存入的动作 reducer 中要有根据action写入的逻辑
+ *  todoList 有toggle的功能  ===> action 中要有toggle 的方法 reducer 中要有根据action的id 写入list每个item状态的逻辑
+ * todoList 有筛选功能  ===> 简化的这版，根据底部的button去更新visibility State的状态， 然后 todolist组件去根据visibility State的状态去更新list
+ * 底部的切换按钮，可以更换相应的列表展示，然后 在todolist中去进行逻辑筛选， 所以在todoList中，就要有根据按钮传到state中的状态去动态更改todolist的展示
+
+ ### 总结
+
+ todoList 列表就是通过三个组件之间相互传递状态，来更新列表或试图。 
