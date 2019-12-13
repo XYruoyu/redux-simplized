@@ -22,7 +22,8 @@ class TodoList extends React.Component{
     return (
       <div>
         {this.props.todos.map(todo =>  //* map 要有返回值，此处不能加大括号返回
-          <div key={todo.id} onClick={() => this.props.toggle(todo.id)} style={{ textDecoration: todo.completed ? 'line-through' : 'none'}}>{todo.text}</div>
+          // <div key={todo.id} onClick={() => this.props.toggle(todo.id)} style={{ textDecoration: todo.completed ? 'line-through' : 'none'}}>{todo.text}</div>
+          <div key={todo.id} onClick={() => this.props.dispatch(toggleTodo(todo.id))} style={{ textDecoration: todo.completed ? 'line-through' : 'none'}}>{todo.text}</div>
         )}
       </div>
     )
@@ -34,7 +35,11 @@ const mapStateToProps =  state => ({
   todos: getVisibleTodos(state.todos, state.visibilityFilter)
 })
 
-const mapDispatchToProps = dispatch => ({
-  toggle: id => dispatch(toggleTodo(id))
-})
-export default connect(mapStateToProps,mapDispatchToProps)(TodoList)
+// const mapDispatchToProps = dispatch => ({
+//   toggle: id => dispatch(toggleTodo(id))
+// })
+// export default connect(mapStateToProps,mapDispatchToProps)(TodoList)
+
+//! 需要注意的点是，如果在connect中有这个参数，就不能再组件中通过this.props.dispatch 去派发
+export default connect(mapStateToProps)(TodoList)
+
